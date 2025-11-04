@@ -55,6 +55,10 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         }
         chain.doFilter(request, response);
     }
+
+    public JwtRequestFilter copy() {
+        return new JwtRequestFilter(this.userService, this.jwtUtil);
+    }
 }
 
 

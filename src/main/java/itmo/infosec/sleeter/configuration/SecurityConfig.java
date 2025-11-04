@@ -29,7 +29,7 @@ public class SecurityConfig {
     private final UserDetailsServiceImpl userService;
 
     public SecurityConfig(JwtRequestFilter jwtRequestFilter, UserDetailsServiceImpl userService) {
-        this.jwtRequestFilter = jwtRequestFilter;
+        this.jwtRequestFilter = jwtRequestFilter.copy();
         this.userService = userService;
     }
 
