@@ -51,8 +51,3 @@ curl -X GET http://localhost:8080/api/post \
 
 ### SAST (SpotBugs / Static Analysis)
 ![SAST Report](static/spotbugs-report.png)
-
-## Последний успешный запуск CI/CD
-
-[Последний успешный запуск pipeline](https://github.com/sleeter/ITMO-InformationSecurity-1/actions/runs/19081168531/job/54509874464)
-
