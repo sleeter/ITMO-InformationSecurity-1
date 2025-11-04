@@ -1,0 +1,45 @@
+name: Java CI Security Pipeline
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build-and-scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      # ---------- Build ----------
+      - name: Build project
+        run: ./gradlew clean build -x test
+
+      # ---------- SAST: SpotBugs ----------
+      - name: Run SpotBugs (Static Analysis)
+        run: ./gradlew spotbugsMain spotbugsTest
+        continue-on-error: true
+
+      - name: Upload SpotBugs report
+        uses: actions/upload-artifact@v4
+        with:
+          name: spotbugs-report
+          path: build/reports/spotbugs
+
+      # ---------- SCA: OWASP Dependency Check ----------
+      - name: Run OWASP Dependency-Check
+        run: ./gradlew dependencyCheckAnalyze
+        continue-on-error: true
+
+      - name: Upload Dependency-Check report
+        uses: actions/upload-artifact@v4
+        with:
+          name: dependency-check-report
+          path: build/reports/dependency-check-report.html
