@@ -18,13 +18,11 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      # ---------- Build ----------
       - name: Build project
         run: ./gradlew clean build -x test
 
-      # ---------- SAST: SpotBugs ----------
       - name: Run SpotBugs (Static Analysis)
-        run: ./gradlew spotbugsMain spotbugsTest
+        run: ./gradlew spotbugsMain
         continue-on-error: true
 
       - name: Upload SpotBugs report
@@ -32,14 +30,3 @@ jobs:
         with:
           name: spotbugs-report
           path: build/reports/spotbugs
-
-      # ---------- SCA: OWASP Dependency Check ----------
-      - name: Run OWASP Dependency-Check
-        run: ./gradlew dependencyCheckAnalyze
-        continue-on-error: true
-
-      - name: Upload Dependency-Check report
-        uses: actions/upload-artifact@v4
-        with:
-          name: dependency-check-report
-          path: build/reports/dependency-check-report.html

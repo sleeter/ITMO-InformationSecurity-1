@@ -33,9 +33,6 @@ public class User implements UserDetails {
     @Column(name = "created_at")
     private Instant createdAt;
 
-    @OneToMany(mappedBy = "user")
-    private Set<Post> posts = new LinkedHashSet<>();
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of();
@@ -45,4 +42,14 @@ public class User implements UserDetails {
     public String getUsername() {
         return this.name;
     }
+
+    public User copy() {
+        User copy = new User();
+        copy.id = this.id;
+        copy.name = this.name;
+        copy.password = this.password;
+        copy.createdAt = this.createdAt;
+        return copy;
+    }
+
 }

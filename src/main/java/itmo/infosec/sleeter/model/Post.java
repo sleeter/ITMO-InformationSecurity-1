@@ -21,4 +21,11 @@ public class Post {
     @JoinColumn(name = "user_id")
     private User user;
 
+    public User getUser() {
+        return user == null ? null : user.copy();
+    }
+
+    public void setUser(User user) {
+        this.user = user.copy();
+    }
 }

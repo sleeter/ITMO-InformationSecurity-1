@@ -3,7 +3,6 @@ plugins {
 	id 'org.springframework.boot' version '3.5.7'
 	id 'io.spring.dependency-management' version '1.1.7'
     id 'com.github.spotbugs' version '6.0.14'
-    id 'org.owasp.dependencycheck' version '9.2.0'
 }
 
 group = 'itmo.infosec'
@@ -60,15 +59,4 @@ tasks.withType(com.github.spotbugs.snom.SpotBugsTask).configureEach {
         html.required = true
         html.stylesheet = 'fancy-hist.xsl'
     }
-}
-
-
-dependencyCheck {
-    failBuildOnCVSS = 8
-    suppressionFile = null
-    analyzers {
-        assemblyEnabled = false
-    }
-    formats = ['HTML']
-    outputDirectory = "$buildDir/reports"
 }

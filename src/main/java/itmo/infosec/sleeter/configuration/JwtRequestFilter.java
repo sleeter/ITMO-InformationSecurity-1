@@ -1,6 +1,6 @@
 package itmo.infosec.sleeter.configuration;
 
-import itmo.infosec.sleeter.service.UserDetailsService;
+import itmo.infosec.sleeter.service.UserDetailsServiceImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -17,10 +17,10 @@ import java.io.IOException;
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
 
-    private final UserDetailsService userService;
+    private final UserDetailsServiceImpl userService;
     private final JwtUtil jwtUtil;
 
-    public JwtRequestFilter(UserDetailsService userService, JwtUtil jwtUtil) {
+    public JwtRequestFilter(UserDetailsServiceImpl userService, JwtUtil jwtUtil) {
         this.userService = userService;
         this.jwtUtil = jwtUtil;
     }

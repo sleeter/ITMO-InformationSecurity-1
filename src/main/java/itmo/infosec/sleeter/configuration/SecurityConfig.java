@@ -1,12 +1,11 @@
 package itmo.infosec.sleeter.configuration;
 
-import itmo.infosec.sleeter.service.UserDetailsService;
+import itmo.infosec.sleeter.service.UserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.authentication.jaas.AbstractJaasAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -27,9 +26,9 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 @EnableMethodSecurity
 public class SecurityConfig {
     private final JwtRequestFilter jwtRequestFilter;
-    private final UserDetailsService userService;
+    private final UserDetailsServiceImpl userService;
 
-    public SecurityConfig(JwtRequestFilter jwtRequestFilter, UserDetailsService userService) {
+    public SecurityConfig(JwtRequestFilter jwtRequestFilter, UserDetailsServiceImpl userService) {
         this.jwtRequestFilter = jwtRequestFilter;
         this.userService = userService;
     }
