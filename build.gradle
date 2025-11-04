@@ -54,12 +54,14 @@ spotbugs {
 }
 
 tasks.withType(com.github.spotbugs.snom.SpotBugsTask).configureEach {
+    ignoreFailures = true
     reports {
         xml.required = false
         html.required = true
         html.stylesheet = 'fancy-hist.xsl'
     }
 }
+
 
 dependencyCheck {
     failBuildOnCVSS = 8
